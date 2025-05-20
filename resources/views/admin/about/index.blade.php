@@ -70,8 +70,8 @@
                     <h5 class="card-title">About</h5>
                     <a href="{{ route('about.edit') }}" class="btn btn-primary">Update</a>
                 </div>
-              <p>{{$about->headline}}</p>
-              <p>{{$about->description}}</p>
+              <p>{{optional($about)->headline}}</p>
+              <p>{{optional($about)->description}}</p>
             </div>
           </div>
 
