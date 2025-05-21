@@ -43,3 +43,11 @@ Route::get('/resume', [WebResumeController::class, 'index'])->name('webresume.in
 Route::get('/project', [WebProjectController::class, 'index'])->name('webproject.index');
 Route::get('/contact', [WebContactController::class, 'index'])->name('webcontact.index');
 Route::post('/contact', [WebContactController::class, 'store'])->name('webcontact.store');
+Route::get('/cek-env', function () {
+    return [
+        'env_app_url' => env('APP_URL'),
+        'config_app_url' => config('app.url'),
+        'current_url' => url('/'),
+        'route_url' => route('home'), // Ganti 'home' jika tidak ada
+    ];
+});
