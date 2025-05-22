@@ -72,7 +72,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Date & Time</th>
                             <th scope="col">IP-Address</th>
                             <th scope="col">User Agent</th>
                         </tr>

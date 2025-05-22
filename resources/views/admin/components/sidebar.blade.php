@@ -21,7 +21,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('contacts.index')}}">
           <i class="bi bi-envelope"></i>
-          <span>Contact</span>
+          <span>Messages</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
