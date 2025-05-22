@@ -87,7 +87,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $visits->links() }}
+                {{ $visits->links('pagination::bootstrap-5') }}
             </div>
           </div>
 
