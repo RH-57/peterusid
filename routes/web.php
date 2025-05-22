@@ -25,6 +25,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::post('/change-password', [LoginController::class, 'changePassword'])->name('change.password');
+
     Route::get('/about', [AboutController::class, 'index'])->name('about.index');
     Route::get('/about/edit', [AboutController::class, 'edit'])->name('about.edit');
     Route::put('/about', [AboutController::class, 'update'])->name('about.update');

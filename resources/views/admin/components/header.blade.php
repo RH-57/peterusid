@@ -42,18 +42,26 @@
             <li class="dropdown-header">
               <h6>{{ Auth::user()->name }}</h6>
             </li>
-            <!--
+
             <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
+                <span>Settings</span>
               </a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
--->
-           <li>
+
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center w-100 bg-transparent border-0 text-start px-3 py-2"
+                    data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                    <i class="bi bi-key me-2"></i>
+                    <span>Change Password</span>
+                </button>
+            </li>
+
+            <li>
                 <form action="{{ route('logout') }}" method="POST" class="dropdown-item p-0 m-0 border-0 bg-transparent">
                     @csrf
                     <button type="submit" class="d-flex align-items-center w-100 bg-transparent border-0 text-start px-3 py-2">
@@ -71,3 +79,49 @@
     </nav><!-- End Icons Navigation -->
 
   </header>
+
+  <!-- Modal Change Password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="{{ route('change.password') }}">
+        @csrf
+        <div class="modal-header">
+          <h5 class="modal-title">Ubah Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          {{-- Tampilkan error/success jika ada --}}
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+              @endforeach
+            </div>
+          @endif
+
+          @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+          @endif
+
+          <div class="mb-3">
+            <label for="current_password" class="form-label">Password Lama</label>
+            <input type="password" name="current_password" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="new_password" class="form-label">Password Baru</label>
+            <input type="password" name="new_password" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="new_password_confirmation" class="form-label">Konfirmasi Password Baru</label>
+            <input type="password" name="new_password_confirmation" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Ubah Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
