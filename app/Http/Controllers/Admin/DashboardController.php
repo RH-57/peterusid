@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index() {
 
-        $visits = Visit::count();
+        $visits = Visit::distinct('ip_address')->count();
 
         return view('admin.index', compact('visits'));
     }
