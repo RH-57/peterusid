@@ -54,8 +54,8 @@
       <h1>Add Skills</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Skills</a></li>
+          <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('skills.index')}}">Skills</a></li>
           <li class="breadcrumb-item active">Add</li>
         </ol>
       </nav>

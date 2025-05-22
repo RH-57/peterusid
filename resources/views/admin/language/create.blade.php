@@ -54,8 +54,8 @@
       <h1>Add Languages</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Languages</a></li>
+          <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('languages.index')}}">Languages</a></li>
           <li class="breadcrumb-item active">Add</li>
         </ol>
       </nav>

@@ -51,11 +51,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Create Projects</h1>
+      <h1>Add Experience</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Projects</a></li>
+          <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('experiences.index')}}">Experiences</a></li>
           <li class="breadcrumb-item active">Create</li>
         </ol>
       </nav>
