@@ -80,13 +80,14 @@
                     <tbody>
                         @foreach ($visits as $visit)
                         <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
+                            <th>{{ $visit->created_at }}</th>
                             <td>{{ $visit->ip_address }}</td>
                             <td>{{ $visit->user_agent }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                {{ $visits->links() }}
             </div>
           </div>
 
