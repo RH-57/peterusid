@@ -80,7 +80,7 @@
                     </div>
                     <div class="ps-3">
                       <h6>{{$visits}}</h6>
-                      <span class="text-success small pt-1 fw-bold">Person</span>
+                      <span class="text-success small pt-1 fw-bold">Person Today</span>
 
                     </div>
                   </div>
