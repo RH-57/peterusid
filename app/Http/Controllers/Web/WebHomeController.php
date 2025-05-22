@@ -13,7 +13,8 @@ class WebHomeController extends Controller
     {
         Visit::create([
             'ip_address' => $request->ip(),
-            'user_agent' => $request->header('User-Agent')
+            'user_agent' => $request->header('User-Agent'),
+            'url' => $request->fullUrl(),
         ]);
 
         $abouts = About::first();
