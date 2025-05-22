@@ -84,7 +84,7 @@
                             <th>{{ $visit->created_at }}</th>
                             <td>{{ $visit->ip_address }}</td>
                             <!--<td>{{ $visit->url }}</td>-->
-                            <td>{{ \Illuminate\Support\Str::limit($visit->user_agent, 35) }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($visit->user_agent, 45) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
