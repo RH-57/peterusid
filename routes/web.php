@@ -16,8 +16,10 @@ use App\Http\Controllers\Web\WebProjectController;
 use App\Http\Controllers\Web\WebResumeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [LoginController::class, 'show'])->name('login.show');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'show'])->name('login.show');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+});
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
