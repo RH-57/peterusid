@@ -105,21 +105,21 @@
           @endif
 
           <div class="mb-3">
-            <label for="current_password" class="form-label">Password Lama</label>
+            <label for="current_password" class="form-label">Current Password</label>
             <input type="password" name="current_password" class="form-control" required>
           </div>
           <div class="mb-3">
-            <label for="new_password" class="form-label">Password Baru</label>
+            <label for="new_password" class="form-label">New Password</label>
             <input type="password" name="new_password" class="form-control" required>
           </div>
           <div class="mb-3">
-            <label for="new_password_confirmation" class="form-label">Konfirmasi Password Baru</label>
+            <label for="new_password_confirmation" class="form-label">Confirm Password</label>
             <input type="password" name="new_password_confirmation" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Ubah Password</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
     </div>
