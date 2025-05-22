@@ -74,7 +74,7 @@
                         <tr>
                             <th scope="col">Date & Time</th>
                             <th scope="col">IP-Address</th>
-                            <!--<th scope="col">Url</th>-->
+                            <th scope="col">Url</th>
                             <th scope="col">User Agent</th>
                         </tr>
                     </thead>
@@ -83,7 +83,7 @@
                         <tr>
                             <th>{{ $visit->created_at }}</th>
                             <td>{{ $visit->ip_address }}</td>
-                            <!--<td>{{ $visit->url }}</td>-->
+                            <td>{{ $visit->url }}</td>
                             <td>{{ \Illuminate\Support\Str::limit($visit->user_agent, 45) }}</td>
                         </tr>
                         @endforeach
