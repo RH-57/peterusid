@@ -24,6 +24,7 @@ Route::middleware('guest')->group(function () {
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/search-urls', [DashboardController::class, 'searchUrls'])->name('dashboard.search.urls');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::post('/change-password', [LoginController::class, 'changePassword'])->name('change.password');
@@ -41,6 +42,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('/urls', UrlController::class)->except(['show']);
     Route::get('/urls/redirect/{id}', [\App\Http\Controllers\Admin\UrlController::class, 'redirect'])->name('urls.redirect');
     Route::get('/urls/search', [\App\Http\Controllers\Admin\UrlController::class, 'search'])->name('urls.search');
+
 
 
     Route::get('/visits', [VisitController::class, 'index'])->name('visit.index');

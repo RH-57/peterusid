@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin</title>
+  <title>Dashboard - Admin</title>
 
   <link href="{{ asset('admin/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('admin/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -38,32 +38,24 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
-
             <!-- URL Table -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
-                <div class="card-body d-flex flex-column" style="height: 150px;">
+                <div class="card-body d-flex flex-column" style="height: 250px;">
                   <div class="overflow-auto mt-2" style="flex: 1;">
+                    <div class="d-flex gap-2 sticky-top bg-white z-1 p-1">
+                        <input type="text" class="form-control form-control-sm" id="search-url-dashboard" placeholder="Search URL..." style="max-width: 200px;">
+                        <input type="date" class="form-control form-control-sm" id="search-date-dashboard" style="max-width: 180px;">
+                    </div>
                     <table class="table table-sm mb-0">
                       <thead>
                         <tr>
                           <th class="small">URL</th>
-                          <th class="small text-nowrap">Last Use</th>
+                          <th class="small text-nowrap">Date</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        @foreach($urls as $url)
-                        <tr>
-                          <td class="small align-middle">
-                            <a href="#" class="open-in-iframe" data-url="{{ route('urls.redirect', $url->id) }}">
-                              {{ $url->url }}
-                            </a>
-                          </td>
-                          <td class="small align-middle text-nowrap">
-                            {{ $url->last_use ? \Carbon\Carbon::parse($url->last_use)->format('d M Y H:i') : '-' }}
-                          </td>
-                        </tr>
-                        @endforeach
+                      <tbody id="dashboard-url-table">
+                        @include('admin.components.url_table', ['urls' => $urls])
                       </tbody>
                     </table>
                   </div>
@@ -128,7 +120,18 @@
           </div>
         </div>
       </div>
-
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title mb-0">Maps</h5>
+                        </div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d247.9324372419977!2d106.7850108970013!3d-6.141583230573993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sKompleks%20fajar%20permai%20no.%2056%20ao%20rt08%20rw%2017%20jakarta%20utara%2014450!5e0!3m2!1sid!2sid!4v1752651859706!5m2!1sid!2sid" width="100%" height="500px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
   </main>
 
@@ -161,28 +164,67 @@
   <!-- Iframe & Button Handler -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const iframe = document.getElementById('urlPreviewFrame');
-      const tabBtn = document.getElementById('openTabBtn');
-      const winBtn = document.getElementById('openWindowBtn');
-      let currentUrl = '';
+    const iframe = document.getElementById('urlPreviewFrame');
+    const tabBtn = document.getElementById('openTabBtn');
+    const winBtn = document.getElementById('openWindowBtn');
+    let currentUrl = '';
 
-      document.querySelectorAll('.open-in-iframe').forEach(link => {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          currentUrl = this.dataset.url;
-          iframe.src = currentUrl;
-        });
-      });
+    // Inisialisasi link awal
+    attachIframeLinks();
 
-      tabBtn.addEventListener('click', () => {
+    // Tombol untuk buka di tab/window baru
+    tabBtn.addEventListener('click', () => {
         if (currentUrl) window.open(currentUrl, '_blank');
-      });
+    });
 
-      winBtn.addEventListener('click', () => {
+    winBtn.addEventListener('click', () => {
         if (currentUrl) window.open(currentUrl, '_blank', 'width=1200,height=800');
-      });
+    });
+
+    // Delegasi klik agar selalu update currentUrl
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('open-in-iframe')) {
+        e.preventDefault();
+        currentUrl = e.target.dataset.url;
+        iframe.src = currentUrl;
+        }
+    });
     });
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlInput = document.getElementById('search-url-dashboard');
+        const dateInput = document.getElementById('search-date-dashboard');
+        const tableBody = document.getElementById('dashboard-url-table');
+
+        function fetchFilteredUrls() {
+            const url = encodeURIComponent(urlInput.value);
+            const date = dateInput.value;
+
+            fetch(`{{ route('dashboard.search.urls') }}?url=${url}&date=${date}`)
+            .then(res => res.json())
+            .then(data => {
+                tableBody.innerHTML = data.html;
+                attachIframeLinks();
+            })
+            .catch(err => console.error('Search Error:', err));
+        }
+
+        urlInput.addEventListener('input', fetchFilteredUrls);
+        dateInput.addEventListener('change', fetchFilteredUrls);
+    });
+
+    function attachIframeLinks() {
+        const iframe = document.getElementById('urlPreviewFrame');
+        document.querySelectorAll('.open-in-iframe').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const currentUrl = this.dataset.url;
+            iframe.src = currentUrl;
+        });
+        });
+    }
+    </script>
 
 </body>
 </html>
