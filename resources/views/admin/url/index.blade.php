@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Create Projects - Admin</title>
+  <title>URL - Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -30,7 +30,7 @@
   <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 
   <!-- =======================================================
-  * Template Name: NiceAdminA
+  * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
   * Updated: Apr 20 2024 with Bootstrap v5.3.3
   * Author: BootstrapMade.com
@@ -51,12 +51,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Create Projects</h1>
+      <h1>URL Page</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Projects</a></li>
-          <li class="breadcrumb-item active">Create</li>
+          <li class="breadcrumb-item active">URLs</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -68,56 +67,36 @@
           <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="card-title">Create</h5>
+                    <h5 class="card-title">List URL</h5>
+                    <a class="btn btn-primary" href="{{ route('urls.create')}}">Add URL</a>
                 </div>
-                <form action="{{route('projects.store')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row mb-3">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
-                            @error('name')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="description" class="col-sm-2 col-form-label">Description</label>
-                        <div class="col-sm-6">
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" value="{{old('description')}}" style="height: 100px"></textarea>
-                            @error('description')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="image" class="col-sm-2 col-form-label">Image</label>
-                        <div class="col-sm-6">
-                            <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="formFile">
-                            @error('image')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-secondary">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                </form>
+                <div class="input-group mb-3" style="max-width: 300px;">
+                    <input type="text" class="form-control" id="search-url" placeholder="Search...">
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Group</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Last Use</th>
+                        <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="url-table-body">
+                        @include('admin.url.components.table', ['urls' => $urls])
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-center">
+                    {{ $urls->links() }}
+                </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
 
@@ -141,6 +120,23 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('admin/js/main.js')}}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.getElementById('search-url');
+        const tableBody = document.getElementById('url-table-body');
+
+        input.addEventListener('keyup', function() {
+            const query = this.value;
+
+            fetch(`{{ route('urls.search') }}?q=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    tableBody.innerHTML = data.html;
+                })
+                .catch(err => console.error(err));
+        });
+    });
+    </script>
 
 </body>
 

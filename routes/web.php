@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\UrlController;
 use App\Http\Controllers\Admin\VisitController;
 use App\Http\Controllers\Web\WebContactController;
 use App\Http\Controllers\Web\WebHomeController;
@@ -37,6 +38,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('/skills', SkillController::class);
     Route::resource('/languages', LanguageController::class);
     Route::resource('/contacts', ContactController::class);
+    Route::resource('/urls', UrlController::class)->except(['show']);
+    Route::get('/urls/redirect/{id}', [\App\Http\Controllers\Admin\UrlController::class, 'redirect'])->name('urls.redirect');
+    Route::get('/urls/search', [\App\Http\Controllers\Admin\UrlController::class, 'search'])->name('urls.search');
+
 
     Route::get('/visits', [VisitController::class, 'index'])->name('visit.index');
 

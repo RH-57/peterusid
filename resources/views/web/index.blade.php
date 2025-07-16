@@ -24,6 +24,22 @@
 
             <!-- Header-->
             <header class="py-5">
+                <div id="bannerCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+                     <div class="carousel-inner text-center">
+                        <div class="carousel-item active">
+                            <a href="https://my.domainesia.com/ref.php?u=25997" target="_blank"><img src="https://dnva.me/v9ev4" width="728px" height="90px" alt="DomaiNesia"></a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://my.domainesia.com/ref.php?u=25997" target="_blank"><img src="https://dnva.me/4gnsc" width="728px" height="90px" alt="www.domainesia.com"></a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://my.domainesia.com/ref.php?u=25997" target="_blank"><img src="https://dnva.me/2o1xf" width="728px" height="90px" alt="DomaiNesia" ></a>
+                        </div>
+                        <div class="carousel-item">
+                           <a href="https://my.domainesia.com/ref.php?u=25997" target="_blank"><img src="https://dnva.me/bne38" width="728px" height="90px" alt="www.domainesia.com"></a>
+                        </div>
+                     </div>
+                </div>
                 <div class="container px-5 pb-5">
                     <div class="row gx-5 align-items-center">
                         <div class="col-xxl-5">

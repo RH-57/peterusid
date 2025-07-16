@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Create Projects - Admin</title>
+  <title>Add URLs - Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -55,7 +55,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Projects</a></li>
+          <li class="breadcrumb-item"><a href="index.html">URLs</a></li>
           <li class="breadcrumb-item active">Create</li>
         </ol>
       </nav>
@@ -70,8 +70,19 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="card-title">Create</h5>
                 </div>
-                <form action="{{route('projects.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('urls.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <div class="row mb-3">
+                        <label for="group" class="col-sm-2 col-form-label">Group</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="group" class="form-control @error('group') is-invalid @enderror" value="{{old('group')}}">
+                            @error('group')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-6">
@@ -84,8 +95,19 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                        <label for="url" class="col-sm-2 col-form-label">URL</label>
                         <div class="col-sm-6">
+                            <input type="text" name="url" class="form-control @error('url') is-invalid @enderror" value="{{old('url')}}">
+                            @error('url')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-8">
                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" value="{{old('description')}}" style="height: 100px"></textarea>
                             @error('description')
                                 <div class="alert alert-danger mt-2">
@@ -95,16 +117,15 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="image" class="col-sm-2 col-form-label">Image</label>
-                        <div class="col-sm-6">
-                            <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="formFile">
-                            @error('image')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <label for="status" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="status" name="status" value="active" {{ old('status', 'active') === 'active' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="status">Active</label>
+                            </div>
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
